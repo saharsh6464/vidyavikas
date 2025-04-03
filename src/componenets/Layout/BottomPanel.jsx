@@ -5,7 +5,6 @@ import "./BottomPanel.css"; // Import your CSS file for styling
 const BottomPanel = () => {
     const { selectedQuestion, results } = useQuestions();
     const [selectedTestCaseIndex, setSelectedTestCaseIndex] = useState(0);
-
     useEffect(() => {
         setSelectedTestCaseIndex(0);
     }, [selectedQuestion]);
