@@ -5,6 +5,8 @@ import { runCode } from "../../services/codeRunner.js";
 import { useQuestions } from "../../context/questionContext";
 
 const TopPanel = () => {
+  const [testResults, setTestResults] = useState({});
+
   const [selectedLanguage, setSelectedLanguage] = useState("c");
   const [code, setCode] = useState("");
   const [output, setOutput] = useState("");
@@ -88,7 +90,6 @@ const boolArray2 = [false, false, true, true];
         functionName = match[1]; // Extracted function name
     }
    let i = 1;
-    updateResults(-1, "", ""); // Reset results before running test cases
     for (const a of selectedQuestion.testCases) {
         let s = convertStringToTuple(a.input);
         console.log("s:", s);
@@ -129,6 +130,11 @@ const boolArray2 = [false, false, true, true];
        updateResults(i, result, a.output); // Update results for each test case
        i++;
     }
+    // setTestResults(prev => ({
+    //   ...prev,
+    //   [selectedQuestion.id]: { passed: passedCount, total: totalCount }
+    // })); 
+    // console.log("Test Results:", testResults); 
 };
 
 

@@ -7,6 +7,7 @@ export const QuestionsProvider = ({ children }) => {
   const [selectedQuestion, setSelectedQuestion] = useState(questionsData[0] || null); // Set the first object as default
   const [currentCode, setCurrentCode] = useState(selectedQuestion ? selectedQuestion.code : ""); // Store current code
   const [results, setResults] = useState({});
+  const [score, setScore] = useState({});
   
   const updateResults = (index1, userOutpu1, expectedOutput1) => {
     if(index1==-1) {
@@ -28,6 +29,14 @@ export const QuestionsProvider = ({ children }) => {
     setCurrentCode(question ? question.code : ""); // Update current code when question changes
   };
 
+  const appendScore = (a) => { 
+    setScore(prevScore => {
+        const newScore = { ...prevScore, [a.qu_id]: a };
+        return newScore;
+    });
+    console.log(score);
+  };
+
   return (
     <QuestionsContext.Provider
       value={{
@@ -40,6 +49,7 @@ export const QuestionsProvider = ({ children }) => {
         setCurrentCode, // Expose function to update code
         questionsData,
         handleSelectQuestion, 
+        appendScore
       }}
     >
       {children}
