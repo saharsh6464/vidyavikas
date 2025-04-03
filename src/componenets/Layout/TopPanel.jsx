@@ -8,7 +8,7 @@ const TopPanel = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("c");
   const [code, setCode] = useState("");
   const [output, setOutput] = useState("");
-  const { selectedQuestion, currentCode, setCurrentCode } = useQuestions();
+  const {updateResults,selectedQuestion, currentCode, setCurrentCode } = useQuestions();
   const [mergedCode, setMergedCode] = useState("");
 
   useEffect(() => {
@@ -78,7 +78,6 @@ const boolArray2 = [false, false, true, true];
 
   const handleRun = async () => {
     setCurrentCode(code); // Save current code globally
-
     let merged = code; // Default: User's code remains unchanged
 
     // **Extract Function Name Safely**
@@ -88,7 +87,8 @@ const boolArray2 = [false, false, true, true];
     if (match) {
         functionName = match[1]; // Extracted function name
     }
-   
+   let i = 1;
+    updateResults(-1, "", ""); // Reset results before running test cases
     for (const a of selectedQuestion.testCases) {
         let s = convertStringToTuple(a.input);
         console.log("s:", s);
@@ -126,6 +126,8 @@ const boolArray2 = [false, false, true, true];
         const result = await runCode(merged, selectedLanguage, "");
         setOutput(result);
         console.log("Output:", result);
+       updateResults(i, result, a.output); // Update results for each test case
+       i++;
     }
 };
 

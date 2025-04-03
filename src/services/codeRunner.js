@@ -31,6 +31,8 @@ export const runCode = async (code, language) => {
       }
     );
 
+    await data;
+
     if (data.run.stdout) return data.run.stdout;
     if (data.run.stderr) return data.run.stderr;
     return "No output received.";

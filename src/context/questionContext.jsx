@@ -6,20 +6,21 @@ const QuestionsContext = createContext();
 export const QuestionsProvider = ({ children }) => {
   const [selectedQuestion, setSelectedQuestion] = useState(questionsData[0] || null); // Set the first object as default
   const [currentCode, setCurrentCode] = useState(selectedQuestion ? selectedQuestion.code : ""); // Store current code
-  const [results, setResults] = useState([
-    { id: '', case: 1, user: '', expected: '', code: '' },
-    { id: '', case: 2, user: '', expected: '', code: '' },
-    { id: '', case: 3, user: '', expected: '', code: '' },
-    { id: '', case: 4, user: '', expected: '', code: '' },
-  ]);
+  const [results, setResults] = useState({});
   
-  const updateExpectedAndCode = (id, caseNum, newUser, newExpected, newCode) => {
-    setResults(r => r.map(res =>
-      res.id === id && res.case === caseNum
-        ? { ...res, user: newUser, expected: newExpected, code: newCode }
-        : res
-    ));
+  const updateResults = (index1, userOutpu1, expectedOutput1) => {
+    if(index1==-1) {
+      setResults({});
+    }
+    const a = { case: index1, userOutput: userOutpu1, expectedOutput: expectedOutput1 }
+    console.log(a);
+    setResults((prevResults) => {
+      const newResults = { ...prevResults };
+      newResults[index1] = a;
+      return newResults;
+    });
   };
+  
   
   const handleSelectQuestion = (questionId) => {
     const question = questionsData.find((q) => q.id === questionId);
@@ -32,7 +33,7 @@ export const QuestionsProvider = ({ children }) => {
       value={{
         results,
         setResults,
-        updateExpectedAndCode,
+        updateResults,
         selectedQuestion,
         setSelectedQuestion,
         currentCode,

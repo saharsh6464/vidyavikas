@@ -1,86 +1,118 @@
-.bottom-panel {
-    background: #222831;
-    color: #EEEEEE;
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    .bottom-panel {
+        background: #222831;
+        color: #EEEEEE;
+        padding: 16px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .test-case-selector {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .test-case-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    /* Default button style */
+    .test-case-btn {
+        background: #393E46;  /* Default grey */
+        color: #EEEEEE;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s, border 0.3s;
+    }
+
+    /* Hover effect */
+    .test-case-btn:hover {
+        background: #4A90E2;
+    }
+
+    /* Active test case (currently selected) */
+    .test-case-btn.active {
+        border: 2px solid yellow;
+        font-weight: bold;
+    }
+
+    /* Correct test case - Green */
+    .test-case-btn.green {
+        background: green;
+        color: white;
+    }
+
+    /* Incorrect test case - Red */
+    .test-case-btn.red {
+        background: red;
+        color: white;
+    }
+
+    /* Test case details */
+    .test-case-details {
+        background: #31363F;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .detail-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    /* Output box */
+    .output-box {
+        background: #1E1E2F;
+        padding: 10px;
+        color: white;
+        border-radius: 6px;
+        overflow-y: auto;
+    }
+/* Default Grey */
+.test-case-btn.grey {
+    background: #393E46;  /* Grey */
+    color: white;
 }
 
-.test-case-selector {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* Passed Test Case */
+.test-case-btn.green {
+    background: #28a745;  /* Green */
+    color: white;
 }
 
-.test-case-buttons {
-    display: flex;
-    gap: 8px;
+/* Active Test Case */
+.test-case-btn.active {
+    border: 2px solid yellow;
+    font-weight: bold;
 }
-
 .test-case-btn {
-    background: #393E46;
+    background: #393E46; /* Default grey */
     color: #EEEEEE;
     border: none;
     padding: 8px 14px;
     border-radius: 6px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, border 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
 }
 
+/* Hover effect */
 .test-case-btn:hover {
     background: #4A90E2;
 }
 
+/* Active test case (currently selected) */
 .test-case-btn.active {
-    background: #4A90E2;
-    font-weight: bold;
-}
-
-.test-case-details {
-    background: #31363F;
-    padding: 12px;
-    border-radius: 8px;
-}
-
-.detail-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 8px;
-}
-
-.output-box {
-    background: #1E1E2F;
-    padding: 10px;
-    color: white;
-    border-radius: 6px;
-    overflow-y: auto;
-}
-.test-case-btn {
-    background: #393E46;
-    color: #EEEEEE;
-    border: none;
-    padding: 6px 12px; /* Smaller padding */
-    border-radius: 4px; /* Slightly sharper edges */
-    cursor: pointer;
-    transition: background 0.15s;
-    width: 70px; /* Reduced width */
-    height: 30px; /* Reduced height */
-    text-align: center;
-    font-size: 12px; /* Smaller font */
-    font-weight: bold;
-    display: flex;
-    align-items: center; /* Center text vertically */
-    justify-content: center; /* Center text horizontally */
-}
-
-.test-case-btn:hover {
-    background: #4A90E2;
-}
-
-.test-case-btn.active {
-    background: #4A90E2;
+    border: 2px solid yellow;
     font-weight: bold;
 }
