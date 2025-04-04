@@ -3,6 +3,7 @@ import { useQuestions } from "../../context/questionContext";
 import "./BottomPanel.css"; // Import your CSS file for styling
 
 const helper = (results, str) => {
+  
   const randomInt = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
   let passCnt = 0;
   let totalCnt = 0;
