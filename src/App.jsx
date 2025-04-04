@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Questions from "./mainquestions/questions";
 import ResizableLayout from "./componenets/Layout/ResizableLayout";
 import { QuestionsProvider } from "./context/questionContext";
@@ -12,50 +12,46 @@ import MockExams from "./pages/MockExams";
 import ReferAndRule from "./pages/ReferAndRule";
 import HowToUse from "./pages/HowToUse";
 import Settings from "./pages/Settings";
-import { useState } from "react";
+import PracticeInstructions from "./instructionpage/setShowInstructions";
 
-// import "./App.css"; // Import your CSS file for styling
-// import "./componenets/Layout/TopPanel.css"; // Import your CSS file for styling
-// import "./componenets/Layout/BottomPanel.css"; // Import your CSS file for styling
-function App() {
+function AppContent() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const location = useLocation();
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
-  return (
-    // <Router>
-    //   <TopBar />
-    //   <QuestionsProvider>
-    //     <Routes>
-    //       {/* <Route path="/" element={<Questions />} /> */}
-    //       {/* <Route path="/solve/:questionId" element={<ResizableLayout />} /> */}
-    //       <Route path="/home" element = {<SideBar/>}/>
-    //     </Routes>
-    //   </QuestionsProvider>
-    // </Router>
-    <Router>
-      <div className="flex h-screen bg-darkBg">
-        {/* Sidebar remains fixed */}
-        <SideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-        {/* Main content area */}
-        <div className="flex-1 flex flex-col min-h-screen">
+  // Determine if we are on the solve page
+  const hideTopBar = location.pathname.startsWith("/solve/");
+
+  return (
+    <div className="flex h-screen bg-darkBg">
+      <SideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      {!hideTopBar && <TopBar1 />}
+
+      <div className="flex-1 flex flex-col min-h-screen">
         <QuestionsProvider>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/" element={<PracticeTests />} />
+            <Route path="/practice-tests" element={<PracticeTests />} />
             <Route path="/mock-exams" element={<MockExams />} />
             <Route path="/refer-and-rule" element={<ReferAndRule />} />
-              <Route path="/q" element={<Questions />} />
-
+            <Route path="/instructionset" element={<PracticeInstructions />} />
             <Route path="/how-to-use" element={<HowToUse />} />
             <Route path="/settings" element={<Settings />} />
-             <Route path="/solve/:questionId" element={<ResizableLayout />} />
+            <Route path="/solve/:questionId" element={<ResizableLayout />} />
           </Routes>
-          </QuestionsProvider>
-        </div>
+        </QuestionsProvider>
       </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }

@@ -40,7 +40,7 @@ const SideBar = ({ isOpen, toggleSidebar }) => {
 
       {/* Logo / Title */}
       <h1 className={`text-xl font-bold text-accent mb-6 transition-opacity ${!isOpen && "opacity-0 hidden"}`}>
-        testmyskills
+    
       </h1>
 
       {/* Navigation Links */}

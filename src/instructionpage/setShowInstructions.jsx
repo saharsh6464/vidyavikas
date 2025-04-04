@@ -29,7 +29,7 @@ const TestFeedback = () => {
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-3xl font-bold mb-4 text-center text-purple-400 border-b-2 border-purple-600 pb-2">
-        Practise Coding Problems
+        Test Feedback
       </h2>
 
       <div className="overflow-x-auto shadow-lg rounded-lg">

@@ -8,6 +8,9 @@ export const QuestionsProvider = ({ children }) => {
   const [currentCode, setCurrentCode] = useState(selectedQuestion ? selectedQuestion.code : ""); // Store current code
   const [results, setResults] = useState({});
   const [score, setScore] = useState({});
+  const [id,setId] = useState(2);
+  const [webCam,setWebCam] = useState({});
+  const [phone,setPhone] = useState({});
   
   const updateResults = (index1, userOutpu1, expectedOutput1) => {
     if(index1==-1) {
@@ -37,6 +40,16 @@ export const QuestionsProvider = ({ children }) => {
     console.log(score);
   };
 
+  const setWebCamData = (webCam) => {
+      setWebCam({...webCam,webCam});
+      console.log("WebCam:"+webCam)
+  }
+
+  const setPhoneData = (phone) => {
+      setPhone({...phone,phone});
+      console.log("Phone:"+phone);
+  }
+
   return (
     <QuestionsContext.Provider
       value={{
@@ -49,7 +62,11 @@ export const QuestionsProvider = ({ children }) => {
         setCurrentCode, // Expose function to update code
         questionsData,
         handleSelectQuestion, 
-        appendScore
+        appendScore,
+        setId,
+        id,
+        setWebCamData,
+        setPhoneData,
       }}
     >
       {children}
