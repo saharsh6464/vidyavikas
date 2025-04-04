@@ -8,9 +8,9 @@ export const QuestionsProvider = ({ children }) => {
   const [currentCode, setCurrentCode] = useState(selectedQuestion ? selectedQuestion.code : ""); // Store current code
   const [results, setResults] = useState({});
   const [score, setScore] = useState({});
-  const [id,setId] = useState(2);
-  const [webCam,setWebCam] = useState({});
-  const [phone,setPhone] = useState({});
+  const [id,setId] = useState(3);
+  const [riskScore,setRiskScore] = useState(0);
+  const [voice,setVoice] = useState("");
   
   const updateResults = (index1, userOutpu1, expectedOutput1) => {
     if(index1==-1) {
@@ -19,6 +19,7 @@ export const QuestionsProvider = ({ children }) => {
     const a = { case: index1, userOutput: userOutpu1, expectedOutput: expectedOutput1 }
     console.log(a);
     setResults((prevResults) => {
+      console.log(result);
       const newResults = { ...prevResults };
       newResults[index1] = a;
       return newResults;
@@ -40,14 +41,17 @@ export const QuestionsProvider = ({ children }) => {
     console.log(score);
   };
 
-  const setWebCamData = (webCam) => {
-      setWebCam({...webCam,webCam});
-      console.log("WebCam:"+webCam)
+  const setRiskScoreData = (data) => {
+    console.log("Risk Score:"+data);;
+    let t=riskScore+data;
+    setRiskScore(t);
+    console.log("Risk Score:"+t);
   }
 
-  const setPhoneData = (phone) => {
-      setPhone({...phone,phone});
-      console.log("Phone:"+phone);
+  const setVoiceData = (data) => {
+    let t=voice+data;
+    setVoice(t);
+    console.log("Voice:"+t);
   }
 
   return (
@@ -65,8 +69,9 @@ export const QuestionsProvider = ({ children }) => {
         appendScore,
         setId,
         id,
-        setWebCamData,
-        setPhoneData,
+        setScore,
+        setRiskScoreData,
+        setVoiceData
       }}
     >
       {children}

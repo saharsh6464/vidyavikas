@@ -13,7 +13,10 @@ import ReferAndRule from "./pages/ReferAndRule";
 import HowToUse from "./pages/HowToUse";
 import Settings from "./pages/Settings";
 import PracticeInstructions from "./instructionpage/setShowInstructions";
-
+import VoiceDetection from "./backend/VoiceDetection";
+import EyeBallTrack from "./backend/EyeBallTrack";
+import WideTracking from "./backend/WideTracking";
+import WebcamCapture from "./backend/WebCamCapture";
 function AppContent() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const location = useLocation();
@@ -22,7 +25,12 @@ function AppContent() {
     setSidebarOpen(!isSidebarOpen);
   };
 
-  // Determine if we are on the solve page
+  // Check if background trackers should run
+  const isTrackingPath =
+    location.pathname.startsWith("/solve/") ||
+    location.pathname === "/practice-tests";
+
+  // Hide top bar only on solve path
   const hideTopBar = location.pathname.startsWith("/solve/");
 
   return (
@@ -41,12 +49,24 @@ function AppContent() {
             <Route path="/how-to-use" element={<HowToUse />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/solve/:questionId" element={<ResizableLayout />} />
+            <Route path="/voice" element={<VoiceDetection />} />
+            <Route path="/wide" element={<WideTracking />} />
+            <Route path="/Eye" element={<EyeBallTrack />} />
           </Routes>
+
+          {/* ✅ Run tracking components in background if solving or practicing */}
+          {isTrackingPath && (
+            <>
+              <EyeBallTrack />
+              <WideTracking />
+            </>
+          )}
         </QuestionsProvider>
       </div>
     </div>
   );
 }
+
 
 function App() {
   return (
